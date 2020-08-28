@@ -10,6 +10,7 @@
   margin: 3% 3%;
 }
 .city {
+  margin: 3% 0 0 0;
   text-shadow: 2px 2px 2px rgb(243, 213, 41);
   font-size: 4vw;
 }
@@ -17,11 +18,7 @@
   font-size: 2vw;
 }
 
-.icon {
-    animation: shake infinite 5s linear;
-    border-radius: 50%;
-    box-shadow: 4px 4px 6px grey;
-  }
+
 .tempConverter {
   text-align: left;
   margin: 1% 0 0 15%;
@@ -48,6 +45,7 @@
 
 .condition {
   text-align: left;
+  font-size: 1 vw;
   margin: 0% 0% 0% 3%;
 }
 .condition img {
@@ -62,16 +60,28 @@
   width: 20%;
   margin: 1% 1%;
 }
+.DayForecast {
+  font-size: 1.5vw;
+}
+
 .DayForecast img {
   width: 20%;
   margin: 1% 1%;
-
 }
 
 .footer {
   text-align: center;
 }
 
+.icon {
+  animation: shake infinite 5s linear;
+  border-radius: 50%;
+  box-shadow: 4px 4px 6px grey;
+}
+
+.icon:hover {
+animation: none;
+}
 
 @keyframes shake {
   0% {transform: rotate(0deg);}
