@@ -111,3 +111,7 @@ animation: none;
   75% {transform: rotate(10deg);}
   100% {transform: rotate(0deg);}
 }
+
+.Loader {
+  margin: 50%, 50%;
+}

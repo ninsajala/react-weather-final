@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import axios from "axios"
 import './App.css';
 import Loader from 'react-loader-spinner'
-
 import Currentweather from "./weather"
 //import Search from "./search"
 import Wind from "./wind"
@@ -16,34 +15,35 @@ import HourForecast from './hourForecast';
 import DayForecast from "./dayForecast"
 import Tempconverter from "./temp-converter"
 
-
-
 function App() {
   const [loaded, setLoaded] = useState(false)
-  const [city, setCity] = useState("")
-  const [description, setDescription] = useState("")
-  const [country, setCountry] = useState("")
-  const [currenttemp, setCurrenttemp] = useState("")
-  const [mintemp, setMintemp] = useState("")
-  const [maxtemp, setMaxtemp] = useState("")
-  const [wind, setWind] = useState("")
-  const [humidity, setHumidity] = useState("")
+  const [data, setData] = useState("")
+  let defaultCity = "Amsterdam"
 
   function getWeather(response){
   setLoaded(true)
-  setCity(response.data.name)
-  setDescription(response.data.weather[0].description)
-  setCountry(response.data.sys.country)
-  setCurrenttemp(Math.round(response.data.main.temp))
-  setMintemp(Math.round(response.data.main.temp_min))
-  setMaxtemp(Math.round(response.data.main.temp_max))
-  setWind(Math.round(response.data.wind.speed * 3,6))
-  setHumidity(response.data.main.humidity)
+  setData(
+    {
+      city: response.data.name,
+      description: response.data.weather[0].description,
+      country: response.data.sys.country,
+      currenttemp: Math.round(response.data.main.temp),
+      mintemp: Math.round(response.data.main.temp_min),
+      maxtemp: Math.round(response.data.main.temp_max),
+      wind: Math.round(response.data.wind.speed * 3,6),
+      humidity: response.data.main.humidity,
+      icon: response.data.weather[0].icon,
+      currenttime: response.data.dt *1000,
+      risetime: response.data.sys.sunrise *1000,
+      settime: response.data.sys.sunset *1000,
+    }
+  )
+
   }
 
   function setLocation(){
   const apiKey =`1be83355b3c9da70c189c0df40350020`
-  let Url = `https://api.openweathermap.org/data/2.5/weather?q=Berlin&appid=${apiKey}&units=metric` 
+  let Url = `https://api.openweathermap.org/data/2.5/weather?q=${defaultCity}&appid=${apiKey}&units=metric` 
   axios.get(Url).then(getWeather)
 }
 
@@ -53,7 +53,7 @@ function App() {
     <div className="container-sm">
     <div className="row">
     <div className="col-6">
-    <Currentweather city={city} description={description} country={country} temp={currenttemp}/> 
+    <Currentweather city={data.city} description={data.description} country={data.country} temp={data.currenttemp} icon={data.icon} currenttime={data.currenttime}/> 
     
     <div className="row">
       <HourForecast />
@@ -69,12 +69,12 @@ function App() {
         <button className="Searchbutton location" title="To current location"><i className="fas fa-map-marker-alt"></i></button>
     </div>
      <Tempconverter />
-     <Mintemp temp={mintemp}/>
-     <Maxtemp temp={maxtemp}/>
-     <Wind wind={wind}/> 
-     <Humidity humidity={humidity}/>
-     <Sunrise />
-     <Sunset />
+     <Mintemp temp={data.mintemp}/>
+     <Maxtemp temp={data.maxtemp}/>
+     <Wind wind={data.wind}/> 
+     <Humidity humidity={data.humidity}/>
+     <Sunrise timestamp={data.risetime}/>
+     <Sunset timestamp={data.settime}/>
      
     </div>
     </div>
@@ -97,6 +97,8 @@ function App() {
   else { 
   setLocation()
   return (
+    <div className="Loader">
+      Loading..
     <Loader
          type="Circles"
          color="#00BFFF"
@@ -105,6 +107,7 @@ function App() {
          timeout={3000} //3 secs
  
       />
+      </div>
   )
 
   };
