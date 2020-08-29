@@ -19,6 +19,36 @@ function App() {
   const [loaded, setLoaded] = useState(false)
   const [data, setData] = useState("")
   let defaultCity = "Amsterdam"
+  const [city, setCity] = useState(defaultCity)
+  let latitude = null
+  let longitude = null
+ 
+  function handleCity(event) {
+    event.preventDefault();
+    setCity(event.target.value);
+  }
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    setLocation();
+  }
+
+  function getGeolocation(event){
+    event.preventDefault();
+    navigator.geolocation.getCurrentPosition(getCoords);
+  }
+function handleGeolocation(response){
+  setCity(response.data.name)
+  setLocation()
+}
+
+  function getCoords(position){
+    latitude = position.coords.latitude;
+    longitude = position.coords.longitude;
+    let apiKey = "1be83355b3c9da70c189c0df40350020"
+    let geoUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`;
+    axios.get(geoUrl).then(handleGeolocation);
+  }
 
   function getWeather(response){
   setLoaded(true)
@@ -43,7 +73,7 @@ function App() {
 
   function setLocation(){
   const apiKey =`1be83355b3c9da70c189c0df40350020`
-  let Url = `https://api.openweathermap.org/data/2.5/weather?q=${defaultCity}&appid=${apiKey}&units=metric` 
+  let Url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric` 
   axios.get(Url).then(getWeather)
 }
 
@@ -64,9 +94,9 @@ function App() {
     </div>
     <div className="col-6">
     <div className="Search">
-        <input className="Searchbar" type="text" placeholder="Search for a city..." />
-        <button className="Searchbutton" type="submit" title="Search"><i className="fas fa-search-location"></i></button>
-        <button className="Searchbutton location" title="To current location"><i className="fas fa-map-marker-alt"></i></button>
+        <input className="Searchbar" type="text" placeholder="Search for a city..." onChange={handleCity}/>
+        <button className="Searchbutton" type="submit" title="Search" onClick={handleSubmit}><i className="fas fa-search-location"></i></button>
+        <button className="Searchbutton location" title="To current location" onClick={getGeolocation}><i className="fas fa-map-marker-alt"></i></button>
     </div>
      <Tempconverter />
      <Mintemp temp={data.mintemp}/>
