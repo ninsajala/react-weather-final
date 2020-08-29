@@ -29,6 +29,7 @@ p {
 h2 {
   font-size: 1.8vw;
   text-shadow: 2px 2px 2px rgb(243, 213, 41);
+  text-transform: capitalize;
 }
 form {
   max-width: 100%;

@@ -1,10 +1,10 @@
 import React from "react"
 import windIcon from "./images/wind.png"
 
-export default function Wind(){
+export default function Wind(props){
     return(
     <div className="condition">
-    <p><img className="icon" src={windIcon} alt="Wind Icon"/>The windspeed is 12 km per hour</p>
+    <p><img className="icon" src={windIcon} alt="Wind Icon"/>The windspeed is {props.wind} km per hour</p>
     </div>)
 
 }
