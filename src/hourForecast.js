@@ -1,12 +1,12 @@
 import React from "react"
-import icon from "./images/04n.png"
+import Formattime from "./formattime"
 
-export default function HourForecast(){
+export default function HourForecast(props){
     return (
         <div className="col-3 HourForecast">
-        <p>15h   <br />
-        <img className="icon" src={icon} alt="Weather Icon" /> <br />
-        17°C</p>
+        <p><Formattime timestamp={props.currenttime}/><br />
+        <img className="icon" src={`./images/${props.icon}.png`} alt={props.description} /> <br />
+        {props.temp}°{props.unit}</p>
         </div>
     )
     }

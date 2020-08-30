@@ -4,6 +4,6 @@ import maxIcon from "./images/max-temp.png"
 export default function Maxtemp(props){
     return(
     <div className="condition">
-    <p><img className="icon" src={maxIcon} alt="Maximum Temperature Icon"/>The maximum temperature is {props.temp}°C</p>
+    <p><img className="icon" src={maxIcon} alt="Maximum Temperature Icon"/>The maximum temperature is {props.temp}°{props.unit}</p>
     </div>)
 }

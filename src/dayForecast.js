@@ -1,13 +1,14 @@
 import React from "react"
-import icon from "./images/04n.png"
+import Formatshortdate from "./formatshortdate"
+import Formatday from "./formatday.js"
 
-export default function DayForecast(){
+export default function DayForecast(props){
     return (
         <div className="col-2 DayForecast">
-        <p>Wed<br />
-        Aug 31</p>       
-        <img className="icon" src={icon} alt="Weather Icon" />
-        <p>18°C</p>
+        <p><Formatday timestamp={props.timestamp}/><br />
+           <Formatshortdate timestamp={props.timestamp} /></p>       
+        <img className="icon" src={`./images/${props.icon}.png`} alt={props.description} />
+        <p>{props.temp}°{props.unit}</p>
         </div>
     )
     }

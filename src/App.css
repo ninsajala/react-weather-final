@@ -44,9 +44,11 @@ form {
 .tempConverter img{
   width: 10%;
 }  
+.tempConverter img:hover{
+  transform: scale(1.2);
+}  
 .tempConverter a:hover {
   text-decoration: none;
-
 }
 .Search {
   text-align: center;

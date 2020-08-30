@@ -16,7 +16,7 @@ export default function Currentweather(props){
     <img className="icon" src={(iconSrc)} alt={props.description} />
     <p><Formatday timestamp={props.currenttime} /><br />
     <Formatdate timestamp={props.currenttime} /></p>
-    <h2>{props.temp}°C | {props.description} </h2>
+    <h2>{props.temp}°{props.unit} | {props.description} </h2>
     </div>
 ) 
     
