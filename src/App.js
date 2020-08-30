@@ -80,9 +80,9 @@ function App() {
       minCel: Math.round(response.data.main.temp_min),
       maxCel: Math.round(response.data.main.temp_max)
     })
-    setCurrent(data.currentCel)
-    setMin(data.minCel)
-    setMax(data.maxCel)
+    setCurrent(Math.round(response.data.main.temp))
+    setMin(Math.round(response.data.main.temp_min))
+    setMax(Math.round(response.data.main.temp_max))
   }
   function getForecast(response){
   console.log(response.data)
@@ -133,15 +133,15 @@ function App() {
      descriptionDay5: response.data.list[39].weather[0].description,
     }
   )
-  setHour1(forecast.celHour1)
-  setHour2(forecast.celHour2)
-  setHour3(forecast.celHour3)
-  setHour4(forecast.celHour4)
-  setDay1(forecast.celDay1)
-  setDay2(forecast.celDay2)
-  setDay3(forecast.celDay3)
-  setDay4(forecast.celDay4)
-  setDay5(forecast.celDay5)
+  setHour1(Math.round(response.data.list[0].main.temp))
+  setHour2(Math.round(response.data.list[1].main.temp))
+  setHour3(Math.round(response.data.list[2].main.temp))
+  setHour4(Math.round(response.data.list[3].main.temp))
+  setDay1(Math.round(response.data.list[7].main.temp))
+  setDay2(Math.round(response.data.list[15].main.temp))
+  setDay3(Math.round(response.data.list[23].main.temp))
+  setDay4(Math.round(response.data.list[31].main.temp))
+  setDay5(Math.round(response.data.list[38].main.temp))
 }
 
   function setLocation(){

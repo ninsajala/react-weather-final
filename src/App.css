@@ -80,7 +80,7 @@ form {
   font-size: 1.2vw;
 }
 .HourForecast img {
-  width: 25%;
+  width: 40%;
   margin: 2% 1% ;
 }
 .DayForecast {
@@ -88,7 +88,7 @@ form {
 }
 
 .DayForecast img {
-  width: 20%;
+  width: 40%;
   margin: 1% 1%;
 }
 
