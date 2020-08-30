@@ -12,8 +12,6 @@ import Sunset from "./sunset"
 import Footer from "./footer"
 import HourForecast from './hourForecast';
 import DayForecast from "./dayForecast"
-import celsiusIcon from "./images/celsius.png"
-import fahrIcon from "./images/fahrenheit.png"
 
 function App() {
   let defaultCity = "Amsterdam"
@@ -142,7 +140,7 @@ function App() {
   setDay3(Math.round(response.data.list[23].main.temp))
   setDay4(Math.round(response.data.list[31].main.temp))
   setDay5(Math.round(response.data.list[38].main.temp))
-}
+  }
 
   function setLocation(){
     const apiKey =`1be83355b3c9da70c189c0df40350020`
@@ -154,8 +152,7 @@ function App() {
   const apiKey =`1be83355b3c9da70c189c0df40350020`
     let Url = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric` 
     axios.get(Url).then(getForecast)
-}
-
+  }
   function setCelsius(event){
     event.preventDefault();
     setUnit(`C`)  
@@ -212,9 +209,9 @@ function App() {
         </form>
     </div>
     <div className="tempConverter">
-        <p>Change units</p>
-       <a title="Set to metric" href="/"><img className="icon" src={celsiusIcon} alt="Celsius Icon" onClick={setCelsius}/> </a> 
-     | <a title="Set to imperial" href="/"><img className="icon" src={fahrIcon} alt="Fahrenheit Icon" onClick={setFahrenheit}/></a>
+        <p className="title">Change units</p>
+       <a title="Set to metric" href="/"><img className="icon" src={"./images/celsius.png"} alt="Celsius Icon" onClick={setCelsius}/> </a> 
+     | <a title="Set to imperial" href="/"><img className="icon" src={"./images/fahrenheit.png"} alt="Fahrenheit Icon" onClick={setFahrenheit}/></a>
     </div>
      <Mintemp temp={min} unit={unit} />
      <Maxtemp temp={max} unit={unit}/>
@@ -226,7 +223,7 @@ function App() {
     </div>
     </div>
     <hr />
-    <p>Coming Days</p>
+    <p className="title">Coming Days</p>
     <div className="row">
       <div className="col-1"></div>
       <DayForecast timestamp={forecast.dateDay1} icon={forecast.iconDay1} description={forecast.descriptionDay1} temp={day1} unit={unit}/>
@@ -245,15 +242,14 @@ function App() {
   setLocation()
   callForecast()
   return (
-    <div className="Loader">
-      Loading..
+    <div className="App">
+      Loading page
     <Loader
          type="Circles"
          color="#00BFFF"
          height={100}
          width={100}
          timeout={3000} //3 secs
- 
       />
       </div>
   )
