@@ -19,7 +19,7 @@ export default function Formatshortdate (props){
         let month = months[date.getMonth()];
         let datum = date.getDate();
   
-        return (<span>`{month} {datum}`</span>)
+        return (<span>{month} {datum}</span>)
   
   }
   
