@@ -83,7 +83,6 @@ function App() {
     setMax(Math.round(response.data.main.temp_max))
   }
   function getForecast(response){
-  console.log(response.data)
   setForecast(
     {celHour1: Math.round(response.data.list[0].main.temp),
      dateHour1: response.data.list[0].dt * 1000,
