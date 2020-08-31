@@ -21,7 +21,9 @@ function App() {
   const [forecast, setForecast] = useState("")
   const [city, setCity] = useState(defaultCity)
   const [unit, setUnit] = useState(`C`)
-  
+  const [speedunit, setSpeedunit] = useState(`km`)
+  const [speed, setSpeed] = useState('')
+
   const [current, setCurrent] = useState("")
   const [min, setMin] = useState("")
   const [max, setMax] = useState("")
@@ -65,7 +67,7 @@ function App() {
     { city: response.data.name,
       description: response.data.weather[0].description,
       country: response.data.sys.country,
-      wind: Math.round(response.data.wind.speed * 3,6),
+      kmwind: Math.round(response.data.wind.speed * 3,6),
       humidity: response.data.main.humidity,
       icon: response.data.weather[0].icon,
       currenttime: response.data.dt *1000,
@@ -78,6 +80,7 @@ function App() {
     setCurrent(Math.round(response.data.main.temp))
     setMin(Math.round(response.data.main.temp_min))
     setMax(Math.round(response.data.main.temp_max))
+    setSpeed(Math.round(response.data.wind.speed * 3,6))
   }
   function getForecast(response){
   setForecast(
@@ -148,13 +151,16 @@ function App() {
 
   function setCelsius(event){
     event.preventDefault();
-    setUnit(`C`)  
+    setUnit(`C`) 
+    setSpeedunit(`km`) 
     setLocation()
   }  
 
   function setFahrenheit(event){
     event.preventDefault();
     setUnit(`F`)
+    setSpeedunit('miles')
+    setSpeed(Math.round(data.kmwind*0.62))
     setCurrent(Math.round(data.currentCel * 1.8 + 32)) 
     setMin(Math.round(data.minCel *1.8 + 32)) 
     setMax(Math.round(data.maxCel *1.8 + 32)) 
@@ -207,7 +213,7 @@ function App() {
     </div>
      <Mintemp temp={min} unit={unit} />
      <Maxtemp temp={max} unit={unit}/>
-     <Wind wind={data.wind}/> 
+     <Wind wind={speed} speedunit={speedunit}/> 
      <Humidity humidity={data.humidity}/>
      <Sunrise timestamp={data.risetime}/>
      <Sunset timestamp={data.settime}/>
