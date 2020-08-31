@@ -15,8 +15,6 @@ import DayForecast from "./dayForecast"
 
 function App() {
   let defaultCity = "Amsterdam"
-  let latitude = null
-  let longitude = null
  
   const [loaded, setLoaded] = useState(false)
   const [data, setData] = useState("")
@@ -49,14 +47,15 @@ function App() {
   function getGeolocation(event){
     event.preventDefault();
     navigator.geolocation.getCurrentPosition(getCoords);
+    function getCoords(position){
+      let latitude = position.coords.latitude;
+      let longitude = position.coords.longitude;
+      let apiKey = "1be83355b3c9da70c189c0df40350020"
+      let geoUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`;
+      axios.get(geoUrl).then(handleGeolocation);
+    }
   }
-  function getCoords(position){
-    latitude = position.coords.latitude;
-    longitude = position.coords.longitude;
-    let apiKey = "1be83355b3c9da70c189c0df40350020"
-    let geoUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`;
-    axios.get(geoUrl).then(handleGeolocation);
-  }
+ 
   function handleGeolocation(response){
     setCity(response.data.name)
     setLocation()
