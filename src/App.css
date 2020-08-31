@@ -6,7 +6,6 @@
 .container-sm {
   border: 1px solid black;
   background-image: linear-gradient(to left bottom, #64f9ce, #94f9cb, #b5f8cd, #cff8d3, #e3f8de);
-  /*background-image: linear-gradient(to top, #fff1eb 0%, #ace0f9 100%);*/
   background-attachment: fixed;
   padding: 5% 5% 0 5%;
 
