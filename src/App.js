@@ -18,9 +18,10 @@ function App() {
  
   const [loaded, setLoaded] = useState(false)
   const [data, setData] = useState("")
-  const [forecast, setForecast] =useState("")
+  const [forecast, setForecast] = useState("")
   const [city, setCity] = useState(defaultCity)
   const [unit, setUnit] = useState(`C`)
+  
   const [current, setCurrent] = useState("")
   const [min, setMin] = useState("")
   const [max, setMax] = useState("")
@@ -42,8 +43,8 @@ function App() {
   function handleSubmit(event) {
     event.preventDefault();
     setLocation();
-    callForecast();
   }
+
   function getGeolocation(event){
     event.preventDefault();
     navigator.geolocation.getCurrentPosition(getCoords);
@@ -52,15 +53,12 @@ function App() {
       let longitude = position.coords.longitude;
       let apiKey = "1be83355b3c9da70c189c0df40350020"
       let geoUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`;
-      axios.get(geoUrl).then(handleGeolocation);
+      let geoForecast = `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`
+      axios.get(geoUrl).then(getWeather);
+      axios.get(geoForecast).then(getForecast);
     }
   }
  
-  function handleGeolocation(response){
-    setCity(response.data.name)
-    setLocation()
-    callForecast()
-  }
   function getWeather(response){
   setLoaded(true)
   setData(
@@ -144,18 +142,14 @@ function App() {
     const apiKey =`1be83355b3c9da70c189c0df40350020`
     let Url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric` 
     axios.get(Url).then(getWeather)
-    }
+    let UrlForecast = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric` 
+    axios.get(UrlForecast).then(getForecast)
+     }
 
-  function callForecast(){
-  const apiKey =`1be83355b3c9da70c189c0df40350020`
-    let Url = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric` 
-    axios.get(Url).then(getForecast)
-  }
   function setCelsius(event){
     event.preventDefault();
     setUnit(`C`)  
     setLocation()
-    callForecast()
   }  
 
   function setFahrenheit(event){
@@ -238,7 +232,6 @@ function App() {
   )}
   else { 
   setLocation()
-  callForecast()
   return (
     <div className="App">
       Loading page
@@ -247,7 +240,7 @@ function App() {
          color="#00BFFF"
          height={100}
          width={100}
-         timeout={3000} //3 secs
+         timeout={3000} 
       />
       </div>
   )
