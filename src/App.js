@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
 import axios from "axios"
 import './App.css';
-import Loader from 'react-loader-spinner'
 import Currentweather from "./weather"
-import Wind from "./wind"
-import Humidity from "./humidity"
-import Mintemp from "./min-temp"
-import Maxtemp from "./max-temp"
-import Sunrise from "./sunrise"
-import Sunset from "./sunset"
+import DayForecast from "./dayForecast"
 import Footer from "./footer"
 import HourForecast from './hourForecast';
-import DayForecast from "./dayForecast"
+import Humidity from "./humidity"
+import Loader from 'react-loader-spinner'
+import Maxtemp from "./max-temp"
+import Mintemp from "./min-temp"
+import Sunrise from "./sunrise"
+import Sunset from "./sunset"
+import Wind from "./wind"
 
 function App() {
   let defaultCity = "Amsterdam"
@@ -21,9 +21,6 @@ function App() {
   const [forecast, setForecast] = useState("")
   const [city, setCity] = useState(defaultCity)
   const [unit, setUnit] = useState(`C`)
-  const [speedunit, setSpeedunit] = useState(`km`)
-  const [speed, setSpeed] = useState('')
-
   const [current, setCurrent] = useState("")
   const [min, setMin] = useState("")
   const [max, setMax] = useState("")
@@ -36,12 +33,13 @@ function App() {
   const [day3, setDay3] = useState("")
   const [day4, setDay4] = useState("")
   const [day5, setDay5] = useState("")
+  const [speedunit, setSpeedunit] = useState(`km`)
+  const [speed, setSpeed] = useState('')
   
   function handleCity(event) {
     event.preventDefault();
     setCity(event.target.value);
   }
-
   function handleSubmit(event) {
     event.preventDefault();
     setLocation();
@@ -60,7 +58,32 @@ function App() {
       axios.get(geoForecast).then(getForecast);
     }
   }
- 
+  function setCelsius(event){
+    event.preventDefault();
+    setUnit(`C`) 
+    setSpeedunit(`km`) 
+    setLocation()
+  }  
+
+  function setFahrenheit(event){
+    event.preventDefault();
+    setUnit(`F`)
+    setSpeedunit('miles')
+    setSpeed(Math.round(data.kmwind*0.62))
+    setCurrent(Math.round(data.currentCel * 1.8 + 32)) 
+    setMin(Math.round(data.minCel *1.8 + 32)) 
+    setMax(Math.round(data.maxCel *1.8 + 32)) 
+    setHour1(Math.round(forecast.celHour1 *1.8 + 32))
+    setHour2(Math.round(forecast.celHour2 *1.8 + 32))
+    setHour3(Math.round(forecast.celHour3 *1.8 + 32))
+    setHour4(Math.round(forecast.celHour4 *1.8 + 32))
+    setDay1(Math.round(forecast.celDay1*1.8 +32))
+    setDay2(Math.round(forecast.celDay2*1.8 +32))
+    setDay3(Math.round(forecast.celDay3*1.8 +32))
+    setDay4(Math.round(forecast.celDay4*1.8 +32))
+    setDay5(Math.round(forecast.celDay5*1.8 +32))
+  }
+
   function getWeather(response){
   setLoaded(true)
   setData(
@@ -149,31 +172,6 @@ function App() {
     axios.get(UrlForecast).then(getForecast)
      }
 
-  function setCelsius(event){
-    event.preventDefault();
-    setUnit(`C`) 
-    setSpeedunit(`km`) 
-    setLocation()
-  }  
-
-  function setFahrenheit(event){
-    event.preventDefault();
-    setUnit(`F`)
-    setSpeedunit('miles')
-    setSpeed(Math.round(data.kmwind*0.62))
-    setCurrent(Math.round(data.currentCel * 1.8 + 32)) 
-    setMin(Math.round(data.minCel *1.8 + 32)) 
-    setMax(Math.round(data.maxCel *1.8 + 32)) 
-    setHour1(Math.round(forecast.celHour1 *1.8 + 32))
-    setHour2(Math.round(forecast.celHour2 *1.8 + 32))
-    setHour3(Math.round(forecast.celHour3 *1.8 + 32))
-    setHour4(Math.round(forecast.celHour4 *1.8 + 32))
-    setDay1(Math.round(forecast.celDay1*1.8 +32))
-    setDay2(Math.round(forecast.celDay2*1.8 +32))
-    setDay3(Math.round(forecast.celDay3*1.8 +32))
-    setDay4(Math.round(forecast.celDay4*1.8 +32))
-    setDay5(Math.round(forecast.celDay5*1.8 +32))
-  }
 
  if (loaded){
   return (
