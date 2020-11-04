@@ -15,7 +15,7 @@ import Wind from "./wind"
 
 function App() {
   let defaultCity = "Amsterdam"
- 
+
   const [loaded, setLoaded] = useState(false)
   const [data, setData] = useState("")
   const [forecast, setForecast] = useState("")
@@ -35,7 +35,7 @@ function App() {
   const [day5, setDay5] = useState("")
   const [speedunit, setSpeedunit] = useState(`km`)
   const [speed, setSpeed] = useState('')
-  
+
   function handleCity(event) {
     event.preventDefault();
     setCity(event.target.value);
@@ -60,19 +60,19 @@ function App() {
   }
   function setCelsius(event){
     event.preventDefault();
-    setUnit(`C`) 
-    setSpeedunit(`km`) 
+    setUnit(`C`)
+    setSpeedunit(`km`)
     setLocation()
-  }  
+  }
 
   function setFahrenheit(event){
     event.preventDefault();
     setUnit(`F`)
     setSpeedunit('miles')
     setSpeed(Math.round(data.kmwind*0.62))
-    setCurrent(Math.round(data.currentCel * 1.8 + 32)) 
-    setMin(Math.round(data.minCel *1.8 + 32)) 
-    setMax(Math.round(data.maxCel *1.8 + 32)) 
+    setCurrent(Math.round(data.currentCel * 1.8 + 32))
+    setMin(Math.round(data.minCel *1.8 + 32))
+    setMax(Math.round(data.maxCel *1.8 + 32))
     setHour1(Math.round(forecast.celHour1 *1.8 + 32))
     setHour2(Math.round(forecast.celHour2 *1.8 + 32))
     setHour3(Math.round(forecast.celHour3 *1.8 + 32))
@@ -166,9 +166,9 @@ function App() {
 
   function setLocation(){
     const apiKey =`1be83355b3c9da70c189c0df40350020`
-    let Url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric` 
+    let Url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`
     axios.get(Url).then(getWeather)
-    let UrlForecast = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric` 
+    let UrlForecast = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`
     axios.get(UrlForecast).then(getForecast)
      }
 
@@ -180,15 +180,15 @@ function App() {
     <div className="row">
     <div className="col-6">
 
-    <Currentweather 
-    city={data.city} 
-    description={data.description} 
-    country={data.country} 
+    <Currentweather
+    city={data.city}
+    description={data.description}
+    country={data.country}
     temp={current}
-    unit={unit}  
-    icon={data.icon} 
-    currenttime={data.currenttime}/> 
-    
+    unit={unit}
+    icon={data.icon}
+    currenttime={data.currenttime}/>
+
     <div className="row">
       <HourForecast timestamp={forecast.dateHour1} icon={forecast.iconHour1} description={forecast.descriptionHour1} temp={hour1} unit={unit}/>
       <HourForecast timestamp={forecast.dateHour2} icon={forecast.iconHour2} description={forecast.descriptionHour2} temp={hour2} unit={unit}/>
@@ -206,16 +206,16 @@ function App() {
     </div>
     <div className="tempConverter">
         <p className="title">Change units</p>
-       <a title="Set to metric" href="/"><img className="icon" src={"./images/celsius.png"} alt="Celsius Icon" onClick={setCelsius}/> </a> 
+       <a title="Set to metric" href="/"><img className="icon" src={"./images/celsius.png"} alt="Celsius Icon" onClick={setCelsius}/> </a>
      | <a title="Set to imperial" href="/"><img className="icon" src={"./images/fahrenheit.png"} alt="Fahrenheit Icon" onClick={setFahrenheit}/></a>
     </div>
      <Mintemp temp={min} unit={unit} />
      <Maxtemp temp={max} unit={unit}/>
-     <Wind wind={speed} speedunit={speedunit}/> 
+     <Wind wind={speed} speedunit={speedunit}/>
      <Humidity humidity={data.humidity}/>
      <Sunrise timestamp={data.risetime}/>
      <Sunset timestamp={data.settime}/>
-     
+
     </div>
     </div>
     <hr />
@@ -232,9 +232,8 @@ function App() {
     <Footer />
     </div>
     </div>
-    
   )}
-  else { 
+  else {
   setLocation()
   return (
     <div className="App">
@@ -244,7 +243,7 @@ function App() {
          color="#00BFFF"
          height={100}
          width={100}
-         timeout={3000} 
+         timeout={3000}
       />
       </div>
   )
