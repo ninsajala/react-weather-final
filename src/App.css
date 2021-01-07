@@ -5,11 +5,18 @@
 
 .container-sm {
   border: 1px solid black;
-  background-image: linear-gradient(to left bottom, #64f9ce, #94f9cb, #b5f8cd, #cff8d3, #e3f8de);
+  background-image: linear-gradient(
+    to left bottom,
+    #64f9ce,
+    #94f9cb,
+    #b5f8cd,
+    #cff8d3,
+    #e3f8de
+  );
   background-attachment: fixed;
   padding: 5% 5% 0 5%;
-
 }
+
 p {
   font-size: 1.3vw;
 }
@@ -18,6 +25,7 @@ p {
   width: 40%;
   margin: 3% 3%;
 }
+
 .city {
   margin: 3% 0 0 0;
   text-shadow: 2px 2px 2px rgb(252, 165, 52);
@@ -26,6 +34,7 @@ p {
 .country {
   font-size: 2vw;
 }
+
 h2 {
   font-size: 1.8vw;
   text-shadow: 2px 2px 2px rgb(252, 165, 52);
@@ -34,31 +43,38 @@ h2 {
 
 .title {
   font-size: 1.8vw;
-  text-shadow: 1px 1px 1px rgb(252, 165, 52)
+  text-shadow: 1px 1px 1px rgb(252, 165, 52);
 }
+
 .tempConverter {
   text-align: center;
   font-size: 3vw;
   margin: 2% 0 2% 15%;
-} 
-.tempConverter img{
+}
+
+.tempConverter img {
   width: 10%;
-}  
-.tempConverter img:hover{
+}
+
+.tempConverter img:hover {
   transform: scale(1.2);
-}  
+}
+
 .tempConverter a:hover {
   text-decoration: none;
 }
+
 form {
   max-width: 100%;
   font-size: 1.5vw;
   text-align: center;
 }
+
 .Search {
   text-align: center;
   margin: 3% 1%;
-} 
+}
+
 .Searchbar {
   margin: 2% 0.5%;
   border-radius: 10px;
@@ -72,9 +88,10 @@ form {
   color: rgb(252, 165, 52);
   background-color: white;
 }
+
 .Searchbutton:hover {
   transform: scale(1.1);
-  background-color:rgb(252, 165, 52);
+  background-color: rgb(252, 165, 52);
   color: white;
 }
 
@@ -83,19 +100,21 @@ form {
   font-size: 1.2 vw;
   margin: 0% 0% 0% 25%;
 }
+
 .condition img {
   width: 10%;
   margin: 1% 2%;
+}
 
-}  
 .HourForecast {
   text-align: center;
   font-size: 1.2vw;
   margin: 2% 0;
 }
+
 .HourForecast img {
   width: 40%;
-  margin: 6% 1% ;
+  margin: 6% 1%;
 }
 
 .DayForecast {
@@ -122,13 +141,23 @@ form {
 }
 
 .icon:hover {
-animation: none;
+  animation: none;
 }
 
 @keyframes shake {
-  0% {transform: rotate(0deg);}
-  25% {transform: rotate(-10deg);}
-  50% {transform: rotate(0deg);}
-  75% {transform: rotate(10deg);}
-  100% {transform: rotate(0deg);}
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-10deg);
+  }
+  50% {
+    transform: rotate(0deg);
+  }
+  75% {
+    transform: rotate(10deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
 }
